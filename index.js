@@ -17,20 +17,18 @@ function katakanaToHiragana(str) {
   );
 
 
-function containsKanji(str) {
-  return /[\u4E00-\u9FFF]/.test(str);
-}
-
 function generateRuby(furiganaArray) {
   return furiganaArray
-    .map(({ word, reading }) => {
-      if (!containsKanji(word) || word === reading) {
-        return word;
+    .map(item => {
+      if (!item.reading || item.word === item.reading) {
+        return item.word;
       }
-      return `<ruby>${word}<rt>${reading}</rt></ruby>`;
+      return `<ruby>${item.word}<rt>${item.reading}</rt></ruby>`;
     })
     .join('');
 }
+
+  
 
 
 
