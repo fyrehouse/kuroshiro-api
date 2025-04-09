@@ -15,18 +15,25 @@ function katakanaToHiragana(str) {
   return str.replace(/[\u30a1-\u30f6]/g, match =>
     String.fromCharCode(match.charCodeAt(0) - 0x60)
   );
+
+
+function containsKanji(str) {
+  return /[\u4E00-\u9FFF]/.test(str);
 }
 
 function generateRuby(furiganaArray) {
   return furiganaArray
-    .map(item => {
-      if (!item.reading || item.word === item.reading) {
-        return item.word;
+    .map(({ word, reading }) => {
+      if (!containsKanji(word) || word === reading) {
+        return word;
       }
-      return `<ruby>${item.word}<rt>${item.reading}</rt></ruby>`;
+      return `<ruby>${word}<rt>${reading}</rt></ruby>`;
     })
     .join('');
 }
+
+
+
 
 async function initialize() {
   if (isReady) return;
