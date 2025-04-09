@@ -15,7 +15,7 @@ function katakanaToHiragana(str) {
   return str.replace(/[\u30a1-\u30f6]/g, match =>
     String.fromCharCode(match.charCodeAt(0) - 0x60)
   );
-
+}
 
 function generateRuby(furiganaArray) {
   return furiganaArray
@@ -27,11 +27,6 @@ function generateRuby(furiganaArray) {
     })
     .join('');
 }
-
-  
-
-
-
 
 async function initialize() {
   if (isReady) return;
